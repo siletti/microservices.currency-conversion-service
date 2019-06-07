@@ -1,10 +1,14 @@
 package com.siletti.microservices.currencyconversion;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class CurrencyConverterController {
@@ -14,6 +18,24 @@ public class CurrencyConverterController {
                                                      @PathVariable String to,
                                                      @PathVariable BigDecimal qty){
 
-        return new CurrencyConversionBean(1L, from, to, BigDecimal.ZERO, qty, BigDecimal.ZERO, 8100);
+        Map<String, String> uriVar = new HashMap<>();
+        uriVar.put("from", from);
+        uriVar.put("to", to);
+
+        ResponseEntity<CurrencyConversionBean> responseEntity = new RestTemplate().getForEntity(
+                "http://localhost:8000/currency-exchange/from/{from}/to/{to}",
+                CurrencyConversionBean.class,
+                uriVar);
+
+        //http://localhost:8000/currency-exchange/from/USD/to/INR
+        CurrencyConversionBean conversionBean = responseEntity.getBody();
+
+
+        return new CurrencyConversionBean(conversionBean.getId(), from, to,
+                conversionBean.getConversionMultiple(),
+                qty,
+                qty.multiply(conversionBean.getConversionMultiple()),
+                conversionBean.getPort());
+
     }
 }
