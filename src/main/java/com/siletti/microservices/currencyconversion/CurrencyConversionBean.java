@@ -3,25 +3,27 @@ package com.siletti.microservices.currencyconversion;
 import java.math.BigDecimal;
 
 public class CurrencyConversionBean {
-
     private Long id;
     private String from;
     private String to;
     private BigDecimal conversionMultiple;
     private BigDecimal quantity;
-    private BigDecimal resultAmount;
+    private BigDecimal totalCalculatedAmount;
     private int port;
 
     public CurrencyConversionBean() {
+
     }
 
-    public CurrencyConversionBean(Long id, String from, String to, BigDecimal conversionMultiple, BigDecimal quantity, BigDecimal resultAmount, int port) {
+    public CurrencyConversionBean(Long id, String from, String to, BigDecimal conversionMultiple, BigDecimal quantity,
+                                  BigDecimal totalCalculatedAmount, int port) {
+        super();
         this.id = id;
         this.from = from;
         this.to = to;
         this.conversionMultiple = conversionMultiple;
         this.quantity = quantity;
-        this.resultAmount = resultAmount;
+        this.totalCalculatedAmount = totalCalculatedAmount;
         this.port = port;
     }
 
@@ -65,12 +67,12 @@ public class CurrencyConversionBean {
         this.quantity = quantity;
     }
 
-    public BigDecimal getResultAmount() {
-        return resultAmount;
+    public BigDecimal getTotalCalculatedAmount() {
+        return totalCalculatedAmount;
     }
 
-    public void setResultAmount(BigDecimal resultAmount) {
-        this.resultAmount = resultAmount;
+    public void setTotalCalculatedAmount(BigDecimal totalCalculatedAmount) {
+        this.totalCalculatedAmount = totalCalculatedAmount;
     }
 
     public int getPort() {
@@ -89,7 +91,7 @@ public class CurrencyConversionBean {
                 ", to='" + to + '\'' +
                 ", conversionMultiple=" + conversionMultiple +
                 ", quantity=" + quantity +
-                ", resultAmount=" + resultAmount +
+                ", totalCalculatedAmount=" + totalCalculatedAmount +
                 ", port=" + port +
                 '}';
     }

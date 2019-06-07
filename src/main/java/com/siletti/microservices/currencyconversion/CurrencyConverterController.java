@@ -27,14 +27,14 @@ public class CurrencyConverterController {
                 CurrencyConversionBean.class,
                 uriVar);
 
-        //http://localhost:8000/currency-exchange/from/USD/to/INR
-        CurrencyConversionBean conversionBean = responseEntity.getBody();
 
+        CurrencyConversionBean conversionBean = responseEntity.getBody();
+        //System.out.println("................. body: "+conversionBean.toString());
 
         return new CurrencyConversionBean(conversionBean.getId(), from, to,
                 conversionBean.getConversionMultiple(),
                 qty,
-                qty.multiply(conversionBean.getConversionMultiple()),
+               qty.multiply(conversionBean.getConversionMultiple()),
                 conversionBean.getPort());
 
     }
