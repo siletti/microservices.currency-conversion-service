@@ -6,7 +6,7 @@ public class CurrencyConversionBean {
     private Long id;
     private String from;
     private String to;
-    private BigDecimal conversionMultiple;
+    private BigDecimal conversion;
     private BigDecimal quantity;
     private BigDecimal totalCalculatedAmount;
     private int port;
@@ -15,13 +15,13 @@ public class CurrencyConversionBean {
 
     }
 
-    public CurrencyConversionBean(Long id, String from, String to, BigDecimal conversionMultiple, BigDecimal quantity,
+    public CurrencyConversionBean(Long id, String from, String to, BigDecimal conversion, BigDecimal quantity,
                                   BigDecimal totalCalculatedAmount, int port) {
         super();
         this.id = id;
         this.from = from;
         this.to = to;
-        this.conversionMultiple = conversionMultiple;
+        this.conversion = conversion;
         this.quantity = quantity;
         this.totalCalculatedAmount = totalCalculatedAmount;
         this.port = port;
@@ -51,12 +51,12 @@ public class CurrencyConversionBean {
         this.to = to;
     }
 
-    public BigDecimal getConversionMultiple() {
-        return conversionMultiple;
+    public BigDecimal getConversion() {
+        return conversion;
     }
 
-    public void setConversionMultiple(BigDecimal conversionMultiple) {
-        this.conversionMultiple = conversionMultiple;
+    public void setConversion(BigDecimal conversion) {
+        this.conversion = conversion;
     }
 
     public BigDecimal getQuantity() {
@@ -89,7 +89,7 @@ public class CurrencyConversionBean {
                 "id=" + id +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
-                ", conversionMultiple=" + conversionMultiple +
+                ", conversion=" + conversion +
                 ", quantity=" + quantity +
                 ", totalCalculatedAmount=" + totalCalculatedAmount +
                 ", port=" + port +

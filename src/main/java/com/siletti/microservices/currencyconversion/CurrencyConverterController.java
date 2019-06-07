@@ -32,9 +32,9 @@ public class CurrencyConverterController {
         //System.out.println("................. body: "+conversionBean.toString());
 
         return new CurrencyConversionBean(conversionBean.getId(), from, to,
-                conversionBean.getConversionMultiple(),
+                conversionBean.getConversion(),
                 qty,
-               qty.multiply(conversionBean.getConversionMultiple()),
+               qty.multiply(conversionBean.getConversion()),
                 conversionBean.getPort());
 
     }
