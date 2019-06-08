@@ -1,5 +1,6 @@
 package com.siletti.microservices.currencyconversion;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,9 @@ import java.util.Map;
 
 @RestController
 public class CurrencyConverterController {
+
+    @Autowired
+    private CurrencyExchangeServiceProxy proxy;
 
     @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{qty}")
     public CurrencyConversionBean retrieveConversion(@PathVariable String from,
@@ -27,9 +31,23 @@ public class CurrencyConverterController {
                 CurrencyConversionBean.class,
                 uriVar);
 
-
         CurrencyConversionBean conversionBean = responseEntity.getBody();
-        //System.out.println("................. body: "+conversionBean.toString());
+
+        return new CurrencyConversionBean(conversionBean.getId(), from, to,
+                conversionBean.getConversion(),
+                qty,
+               qty.multiply(conversionBean.getConversion()),
+                conversionBean.getPort());
+
+    }
+
+    @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{qty}")
+    public CurrencyConversionBean convert(@PathVariable String from,
+                                                     @PathVariable String to,
+                                                     @PathVariable BigDecimal qty){
+
+
+        CurrencyConversionBean conversionBean = proxy.retrieveExchangeValue(from,to);
 
         return new CurrencyConversionBean(conversionBean.getId(), from, to,
                 conversionBean.getConversion(),
